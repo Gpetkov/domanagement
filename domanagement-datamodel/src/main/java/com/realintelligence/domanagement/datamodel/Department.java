@@ -1,7 +1,11 @@
 package com.realintelligence.domanagement.datamodel;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -10,7 +14,17 @@ public class Department extends AbstractEntity {
     @Column(name = "name")
     private String name;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
+    private List<User> employees;
     
+    public List<User> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<User> employees) {
+        this.employees = employees;
+    }
+
     public String getName() {
         return name;
     }

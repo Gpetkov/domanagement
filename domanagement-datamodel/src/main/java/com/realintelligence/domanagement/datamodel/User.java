@@ -4,13 +4,16 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "employee")
-public class User extends AbstractEntity{
+public class User extends AbstractEntity {
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
@@ -36,6 +39,106 @@ public class User extends AbstractEntity{
     @Column(name = "end_date", columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "city_id")
+    private City city;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "department_id")
+    private Department department;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "education_id")
+    private Education education;
+    
+    public Education getEducation() {
+        return education;
+    }
+
+    public void setEducation(Education education) {
+        this.education = education;
+    }
+
+    public Department getDepartment() {
+	return department;
+    }
+
+    public void setDepartment(Department department) {
+	this.department = department;
+    }
+
+    public String getFirstName() {
+	return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+	this.firstName = firstName;
+    }
+
+    public String getSecondName() {
+	return secondName;
+    }
+
+    public void setSecondName(String secondName) {
+	this.secondName = secondName;
+    }
+
+    public String getLastName() {
+	return lastName;
+    }
+
+    public void setLastName(String lastName) {
+	this.lastName = lastName;
+    }
+
+    public String getUsername() {
+	return username;
+    }
+
+    public void setUsername(String username) {
+	this.username = username;
+    }
+
+    public String getEmailAddress() {
+	return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+	this.emailAddress = emailAddress;
+    }
+
+    public Boolean getIsActive() {
+	return isActive;
+    }
+
+    public void setIsActive(Boolean isActive) {
+	this.isActive = isActive;
+    }
+
+    public Date getStartDate() {
+	return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+	this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+	return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+	this.endDate = endDate;
+    }
+
+    public City getCity() {
+	return city;
+    }
+
+    public void setCity(City city) {
+	this.city = city;
+    }
 
     @Override
     public int hashCode() {

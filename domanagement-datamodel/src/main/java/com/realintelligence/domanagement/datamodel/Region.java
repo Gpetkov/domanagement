@@ -1,7 +1,13 @@
 package com.realintelligence.domanagement.datamodel;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -9,6 +15,29 @@ import javax.persistence.Table;
 public class Region extends AbstractEntity {
     @Column(name = "name")
     private String name;
+
+    @OneToMany(fetch=FetchType.LAZY, mappedBy="city")
+    private List<City> cities;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "area_id")
+    private Area area;
+    
+    public Area getArea() {
+        return area;
+    }
+
+    public void setArea(Area area) {
+        this.area = area;
+    }
+
+    public List<City> getCities() {
+        return cities;
+    }
+
+    public void setCities(List<City> cities) {
+        this.cities = cities;
+    }
 
     public String getName() {
 	return name;

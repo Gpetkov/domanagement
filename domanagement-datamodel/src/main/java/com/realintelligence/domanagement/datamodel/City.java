@@ -1,7 +1,13 @@
 package com.realintelligence.domanagement.datamodel;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -13,20 +19,44 @@ public class City extends AbstractEntity {
     @Column(name = "postal_code")
     private Integer postalCode;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "city")
+    private List<User> employees;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "region_id")
+    private Region region;
+
+    
+    public List<User> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<User> employees) {
+        this.employees = employees;
+    }
+
+    public Region getRegion() {
+	return region;
+    }
+
+    public void setRegion(Region region) {
+	this.region = region;
+    }
+
     public String getName() {
-        return name;
+	return name;
     }
 
     public void setName(String name) {
-        this.name = name;
+	this.name = name;
     }
 
     public Integer getPostalCode() {
-        return postalCode;
+	return postalCode;
     }
 
     public void setPostalCode(Integer postalCode) {
-        this.postalCode = postalCode;
+	this.postalCode = postalCode;
     }
 
     @Override
