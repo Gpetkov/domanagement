@@ -26,13 +26,12 @@ public class City extends AbstractEntity {
     @JoinColumn(name = "region_id")
     private Region region;
 
-    
     public List<User> getEmployees() {
-        return employees;
+	return employees;
     }
 
     public void setEmployees(List<User> employees) {
-        this.employees = employees;
+	this.employees = employees;
     }
 
     public Region getRegion() {

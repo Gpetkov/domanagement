@@ -2,6 +2,9 @@ package com.realintelligence.domanagement.datamodel;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,6 +18,42 @@ public class Request {
 
     @Column(name = "list_of_days")
     private String listOfDays;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "comment_id")
+    private Comment comment;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "request_status_id")
+    private RequestStatus requestStatus;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "request_type_id")
+    private RequestType requestType;
+
+    public RequestType getRequestType() {
+	return requestType;
+    }
+
+    public void setRequestType(RequestType requestType) {
+	this.requestType = requestType;
+    }
+
+    public RequestStatus getRequestStatus() {
+	return requestStatus;
+    }
+
+    public void setRequestStatus(RequestStatus requestStatus) {
+	this.requestStatus = requestStatus;
+    }
+
+    public Comment getComment() {
+	return comment;
+    }
+
+    public void setComment(Comment comment) {
+	this.comment = comment;
+    }
 
     public Integer getYear() {
 	return year;

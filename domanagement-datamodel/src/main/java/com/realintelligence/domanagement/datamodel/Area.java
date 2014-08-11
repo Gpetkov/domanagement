@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,6 +23,30 @@ public class Area extends AbstractEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id")
     private Country country;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "manager_id")
+    private User manager;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "hr_id")
+    private User humanResource;
+
+    public User getHumanResource() {
+	return humanResource;
+    }
+
+    public void setHumanResource(User humanResource) {
+	this.humanResource = humanResource;
+    }
+
+    public User getManager() {
+	return manager;
+    }
+
+    public void setManager(User manager) {
+	this.manager = manager;
+    }
 
     public Country getCountry() {
 	return country;

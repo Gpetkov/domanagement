@@ -2,6 +2,10 @@ package com.realintelligence.domanagement.datamodel;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -9,6 +13,29 @@ import javax.persistence.Table;
 public class Comment extends AbstractEntity {
     @Column(name = "content")
     private String content;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employee_id")
+    private User employee;
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "comment")
+    private Request request;
+
+    public Request getRequest() {
+	return request;
+    }
+
+    public void setRequest(Request request) {
+	this.request = request;
+    }
+
+    public User getEmployee() {
+	return employee;
+    }
+
+    public void setEmployee(User employee) {
+	this.employee = employee;
+    }
 
     public String getContent() {
 	return content;

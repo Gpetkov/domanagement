@@ -2,6 +2,8 @@ package com.realintelligence.domanagement.datamodel;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -9,6 +11,17 @@ import javax.persistence.Table;
 public class RequestType extends AbstractEntity {
     @Column(name = "name")
     private String name;
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "requestType")
+    private Request request;
+
+    public Request getRequest() {
+	return request;
+    }
+
+    public void setRequest(Request request) {
+	this.request = request;
+    }
 
     public String getName() {
 	return name;

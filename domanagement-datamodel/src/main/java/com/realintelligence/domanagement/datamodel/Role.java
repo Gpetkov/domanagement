@@ -1,7 +1,10 @@
 package com.realintelligence.domanagement.datamodel;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -9,6 +12,17 @@ import javax.persistence.Table;
 public class Role extends AbstractEntity {
     @Column(name = "name")
     private String name;
+
+    @ManyToMany(mappedBy = "roles")
+    private List<User> employees;
+
+    public List<User> getEmployees() {
+	return employees;
+    }
+
+    public void setEmployees(List<User> employees) {
+	this.employees = employees;
+    }
 
     public String getName() {
 	return name;

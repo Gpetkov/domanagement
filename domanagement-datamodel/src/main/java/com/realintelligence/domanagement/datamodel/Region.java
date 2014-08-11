@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,27 +17,39 @@ public class Region extends AbstractEntity {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(fetch=FetchType.LAZY, mappedBy="city")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "city")
     private List<City> cities;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "area_id")
     private Area area;
-    
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "manager_id")
+    private User manager;
+
+    public User getManager() {
+	return manager;
+    }
+
+    public void setManager(User manager) {
+	this.manager = manager;
+    }
+
     public Area getArea() {
-        return area;
+	return area;
     }
 
     public void setArea(Area area) {
-        this.area = area;
+	this.area = area;
     }
 
     public List<City> getCities() {
-        return cities;
+	return cities;
     }
 
     public void setCities(List<City> cities) {
-        this.cities = cities;
+	this.cities = cities;
     }
 
     public String getName() {

@@ -16,21 +16,21 @@ public class Department extends AbstractEntity {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
     private List<User> employees;
-    
+
     public List<User> getEmployees() {
-        return employees;
+	return employees;
     }
 
     public void setEmployees(List<User> employees) {
-        this.employees = employees;
+	this.employees = employees;
     }
 
     public String getName() {
-        return name;
+	return name;
     }
 
     public void setName(String name) {
-        this.name = name;
+	this.name = name;
     }
 
     @Override

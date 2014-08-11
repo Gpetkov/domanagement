@@ -1,12 +1,17 @@
 package com.realintelligence.domanagement.datamodel;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -51,13 +56,81 @@ public class User extends AbstractEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "education_id")
     private Education education;
-    
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "manager")
+    private Region manageRegion;
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "manager")
+    private Area manageArea;
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "humanResource")
+    private Area hrArea;
+
+    @ManyToMany
+    @JoinTable(name = "employee_to_address", joinColumns = { @JoinColumn(name = "employee_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "address_id", referencedColumnName = "id") })
+    private List<Address> addresses;
+
+    @ManyToMany
+    @JoinTable(name = "user_to_role", joinColumns = { @JoinColumn(name = "employee_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "role_id", referencedColumnName = "id") })
+    private List<Role> roles;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    private List<Comment> comments;
+
+    public List<Comment> getComments() {
+	return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+	this.comments = comments;
+    }
+
+    public List<Role> getRoles() {
+	return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+	this.roles = roles;
+    }
+
+    public List<Address> getAddresses() {
+	return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+	this.addresses = addresses;
+    }
+
+    public Area getHrArea() {
+	return hrArea;
+    }
+
+    public void setHrArea(Area hrArea) {
+	this.hrArea = hrArea;
+    }
+
+    public Area getManageArea() {
+	return manageArea;
+    }
+
+    public void setManageArea(Area manageArea) {
+	this.manageArea = manageArea;
+    }
+
+    public Region getManageRegion() {
+	return manageRegion;
+    }
+
+    public void setManageRegion(Region manageRegion) {
+	this.manageRegion = manageRegion;
+    }
+
     public Education getEducation() {
-        return education;
+	return education;
     }
 
     public void setEducation(Education education) {
-        this.education = education;
+	this.education = education;
     }
 
     public Department getDepartment() {
