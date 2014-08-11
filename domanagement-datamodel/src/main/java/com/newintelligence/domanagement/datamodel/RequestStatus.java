@@ -1,28 +1,26 @@
-package com.realintelligence.domanagement.datamodel;
-
-import java.util.List;
+package com.newintelligence.domanagement.datamodel;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "department")
-public class Department extends AbstractEntity {
+@Table(name = "request_status")
+public class RequestStatus extends AbstractEntity {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
-    private List<User> employees;
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "requestStatus")
+    private Request request;
 
-    public List<User> getEmployees() {
-	return employees;
+    public Request getRequest() {
+	return request;
     }
 
-    public void setEmployees(List<User> employees) {
-	this.employees = employees;
+    public void setRequest(Request request) {
+	this.request = request;
     }
 
     public String getName() {
@@ -49,7 +47,7 @@ public class Department extends AbstractEntity {
 	    return false;
 	if (getClass() != obj.getClass())
 	    return false;
-	Department other = (Department) obj;
+	RequestStatus other = (RequestStatus) obj;
 	if (name == null) {
 	    if (other.name != null)
 		return false;

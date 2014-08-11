@@ -1,4 +1,4 @@
-package com.realintelligence.domanagement.datamodel;
+package com.newintelligence.domanagement.datamodel;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

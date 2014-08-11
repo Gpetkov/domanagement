@@ -1,20 +1,19 @@
-package com.realintelligence.domanagement.datamodel;
+package com.newintelligence.domanagement.datamodel;
 
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "education")
-public class Education extends AbstractEntity {
+@Table(name = "role")
+public class Role extends AbstractEntity {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "education")
+    @ManyToMany(mappedBy = "roles")
     private List<User> employees;
 
     public List<User> getEmployees() {
@@ -49,7 +48,7 @@ public class Education extends AbstractEntity {
 	    return false;
 	if (getClass() != obj.getClass())
 	    return false;
-	Education other = (Education) obj;
+	Role other = (Role) obj;
 	if (name == null) {
 	    if (other.name != null)
 		return false;

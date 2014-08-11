@@ -1,4 +1,4 @@
-package com.realintelligence.domanagement.datamodel;
+package com.newintelligence.domanagement.datamodel;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,12 +7,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "request_status")
-public class RequestStatus extends AbstractEntity {
+@Table(name = "request_type")
+public class RequestType extends AbstractEntity {
     @Column(name = "name")
     private String name;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "requestStatus")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "requestType")
     private Request request;
 
     public Request getRequest() {
@@ -47,7 +47,7 @@ public class RequestStatus extends AbstractEntity {
 	    return false;
 	if (getClass() != obj.getClass())
 	    return false;
-	RequestStatus other = (RequestStatus) obj;
+	RequestType other = (RequestType) obj;
 	if (name == null) {
 	    if (other.name != null)
 		return false;

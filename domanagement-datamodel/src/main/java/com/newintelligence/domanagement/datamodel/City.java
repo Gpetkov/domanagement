@@ -1,4 +1,4 @@
-package com.realintelligence.domanagement.datamodel;
+package com.newintelligence.domanagement.datamodel;
 
 import java.util.List;
 
@@ -8,48 +8,38 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "region")
-public class Region extends AbstractEntity {
+@Table(name = "city")
+public class City extends AbstractEntity {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "postal_code")
+    private Integer postalCode;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "city")
-    private List<City> cities;
+    private List<User> employees;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "area_id")
-    private Area area;
+    @JoinColumn(name = "region_id")
+    private Region region;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "manager_id")
-    private User manager;
-
-    public User getManager() {
-	return manager;
+    public List<User> getEmployees() {
+	return employees;
     }
 
-    public void setManager(User manager) {
-	this.manager = manager;
+    public void setEmployees(List<User> employees) {
+	this.employees = employees;
     }
 
-    public Area getArea() {
-	return area;
+    public Region getRegion() {
+	return region;
     }
 
-    public void setArea(Area area) {
-	this.area = area;
-    }
-
-    public List<City> getCities() {
-	return cities;
-    }
-
-    public void setCities(List<City> cities) {
-	this.cities = cities;
+    public void setRegion(Region region) {
+	this.region = region;
     }
 
     public String getName() {
@@ -60,11 +50,20 @@ public class Region extends AbstractEntity {
 	this.name = name;
     }
 
+    public Integer getPostalCode() {
+	return postalCode;
+    }
+
+    public void setPostalCode(Integer postalCode) {
+	this.postalCode = postalCode;
+    }
+
     @Override
     public int hashCode() {
 	final int prime = 31;
 	int result = super.hashCode();
 	result = prime * result + ((name == null) ? 0 : name.hashCode());
+	result = prime * result + ((postalCode == null) ? 0 : postalCode.hashCode());
 	return result;
     }
 
@@ -76,11 +75,16 @@ public class Region extends AbstractEntity {
 	    return false;
 	if (getClass() != obj.getClass())
 	    return false;
-	Region other = (Region) obj;
+	City other = (City) obj;
 	if (name == null) {
 	    if (other.name != null)
 		return false;
 	} else if (!name.equals(other.name))
+	    return false;
+	if (postalCode == null) {
+	    if (other.postalCode != null)
+		return false;
+	} else if (!postalCode.equals(other.postalCode))
 	    return false;
 	return true;
     }
