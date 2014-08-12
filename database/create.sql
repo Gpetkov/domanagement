@@ -27,6 +27,7 @@ CREATE TABLE `employee` (
   `second_name` VARCHAR(76) NOT NULL DEFAULT 'NULL',
   `last_name` VARCHAR(76) NOT NULL DEFAULT 'NULL',
   `username` VARCHAR(200) NOT NULL DEFAULT 'NULL',
+  `password` VARCHAR(16) NOT NULL DEFAULT 'NULL',
   `education_id` BIGINT NOT NULL,
   `department_id` BIGINT NOT NULL,
   `city_id` BIGINT NOT NULL,
