@@ -1,57 +1,75 @@
-package com.newintelligence.domanagement.datamodel;
+package com.newintelligence.domanagement.datamodel.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import java.io.Serializable;
 
-@Entity
-@Table(name = "request")
-public class Request extends AbstractEntity{
-    @Column(name = "year")
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.newintelligence.domanagement.datamodel.Request;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(Include.ALWAYS)
+public class RequestDto implements Serializable {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
+    private Long id;
+
     private Integer year;
 
-    @Column(name = "month")
     private Integer month;
 
-    @Column(name = "list_of_days")
     private String listOfDays;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "comment_id")
-    private Comment comment;
+    private CommentDto comment;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "request_status_id")
-    private RequestStatus requestStatus;
+    private RequestStatusDto requestStatus;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "request_type_id")
-    private RequestType requestType;
+    private RequestTypeDto requestType;
 
-    public RequestType getRequestType() {
+    public RequestDto(Request request) {
+	this.id = request.getId();
+	this.year = request.getYear();
+	this.month = request.getMonth();
+	// TODO: Consider using builder pattern for this later
+	this.listOfDays = request.getListOfDays();
+	this.comment = new CommentDto(request.getComment());
+	this.requestStatus = new RequestStatusDto(request.getRequestStatus());
+	this.requestType = new RequestTypeDto(request.getRequestType());
+    }
+
+    public Long getId() {
+	return id;
+    }
+
+    public void setId(Long id) {
+	this.id = id;
+    }
+
+    public RequestTypeDto getRequestType() {
 	return requestType;
     }
 
-    public void setRequestType(RequestType requestType) {
+    public void setRequestType(RequestTypeDto requestType) {
 	this.requestType = requestType;
     }
 
-    public RequestStatus getRequestStatus() {
+    public RequestStatusDto getRequestStatus() {
 	return requestStatus;
     }
 
-    public void setRequestStatus(RequestStatus requestStatus) {
+    public void setRequestStatus(RequestStatusDto requestStatus) {
 	this.requestStatus = requestStatus;
     }
 
-    public Comment getComment() {
+    public CommentDto getComment() {
 	return comment;
     }
 
-    public void setComment(Comment comment) {
+    public void setComment(CommentDto comment) {
 	this.comment = comment;
     }
 
@@ -97,7 +115,7 @@ public class Request extends AbstractEntity{
 	    return false;
 	if (getClass() != obj.getClass())
 	    return false;
-	Request other = (Request) obj;
+	RequestDto other = (RequestDto) obj;
 	if (listOfDays == null) {
 	    if (other.listOfDays != null)
 		return false;
