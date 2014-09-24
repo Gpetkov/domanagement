@@ -17,7 +17,7 @@ public class Region extends AbstractEntity {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "city")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "region")
     private List<City> cities;
 
     @ManyToOne(fetch = FetchType.LAZY)

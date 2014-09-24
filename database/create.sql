@@ -36,6 +36,8 @@ CREATE TABLE `employee` (
   `is_active` bit NOT NULL,
   `email_address` VARCHAR(300) NOT NULL,
   `role_id` BIGINT NOT NULL,
+  `date_created` DATETIME NOT NULL,
+  `date_updated` TIMESTAMP NOT NULL,
   PRIMARY KEY (`id`),
 KEY (`education_id`),
 KEY (`department_id`)
